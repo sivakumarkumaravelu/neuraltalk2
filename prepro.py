@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 Preprocess a raw json dataset into hdf5/json files for use in data_loader.lua
 
@@ -40,7 +42,8 @@ def prepro_captions(imgs):
   for i,img in enumerate(imgs):
     img['processed_tokens'] = []
     for j,s in enumerate(img['captions']):
-      txt = str(s).lower().translate(None, string.punctuation).strip().split()
+      t = s.encode('utf-8')
+      txt = str(t).lower().translate(None, string.punctuation).strip().split()
       img['processed_tokens'].append(txt)
       if i < 10 and j == 0: print txt
 
